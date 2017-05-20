@@ -20,10 +20,9 @@ public class GUI_Client_Main {
 
 	public static JTextField jtf;
 	public static JTextArea jta;
-	public static PrintWriter pw;
-	public static Socket soc;
+	static PrintWriter pw;
+	private static Socket soc;
 	public static BufferedReader kin;
-	public static String str1;
 
 	public static void main(String[] args) throws Exception, IOException {
 
@@ -32,7 +31,7 @@ public class GUI_Client_Main {
 		soc = new Socket("127.0.0.1", 9081);
 		System.out.println("Client says connection established");
 		pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(soc.getOutputStream())), true);
-		kin = new BufferedReader(new InputStreamReader(System.in));
+		kin = new BufferedReader(new InputStreamReader(soc.getInputStream()));
 		
 		/*
 		 * for(int i = 0 ; i < 5 ; i ++) { System.out.println("Hello " + i );
@@ -65,17 +64,17 @@ public class GUI_Client_Main {
 		j1.setVisible(true);
 		
 		
-		str1 = kin.readLine();
-		while(!str1.equals("end"))
+		String str = kin.readLine();
+		
+		while(!str.equals("end"))
 		{
-			str1 = kin.readLine();
-			if(str1.equals("end"))
-			{
-				System.out.println("Client signing OFF");
-				System.exit(0);
-			}
+			jta.append("Server : " + str + "\n");
+			str = kin.readLine();
 		}
 		
+
+		System.out.println("Client signing OFF from main class");
+		System.exit(0);
 		
 		
 		
@@ -83,6 +82,5 @@ public class GUI_Client_Main {
 
 		
 		
-		System.out.println("Client signing OFF");
 	}
 }

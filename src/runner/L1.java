@@ -10,16 +10,10 @@ public class L1 implements ActionListener {
 
 		try {
 
-			GUI_Client_Main.str1 = GUI_Client_Main.jtf.getText();
-			GUI_Client_Main.jta.append(GUI_Client_Main.str1 + "\n");
+			String str1 = GUI_Client_Main.jtf.getText();
+			GUI_Client_Main.jta.append("Client : " + str1 + "\n");
 			GUI_Client_Main.jtf.setText("");
-			GUI_Client_Main.pw.println(GUI_Client_Main.str1);
-			
-			if(GUI_Client_Main.str1.equals("end"))
-			{
-				System.out.println("Client signing OFF");
-				System.exit(0);
-			}
+			GUI_Client_Main.pw.println(str1);
 			
 		} catch (Exception e1) {
 			System.out.println("Exception Printed");
